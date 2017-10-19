@@ -55,13 +55,13 @@ namespace JENV {
 				$data = curl_exec($curl);
 				$obj  = json_decode($data, true);
 			} catch (\Exception $e) {
-				die('login server down now.');
+				die('failed: login server down now.');
 			}
 			if (!isset($obj['status']) || $obj['status'] !== 0) {
-				die('failed: ' . $obj['message'] . '.<br/>' . linkTo('/login', 'retry') . '.<br/>' . continue_input());
+				die('failed: login service error.</br><pre>' . json_encode($obj, JSON_UNESCAPED_SLASHES + JSON_UNESCAPED_UNICODE) . '</pre>.<br/>' . linkTo('/login', 'retry') . '.<br/>' . continue_input());
 			}
 			if ($requireSuperAccess && ($obj['user']['email'] !== 'admin@' . BASE_DOMAIN)) {
-				die('no permission.<br/>' . linkTo('/login/logout', 'logout') . '.<br/>' . continue_input());
+				die('failed: no permission.<br/>' . linkTo('/login/logout', 'logout') . '.<br/>' . continue_input());
 			}
 			
 			$_SESSION['uid'] = $token;
