@@ -36,7 +36,7 @@ namespace JENV {
 	
 	/* user login */
 	function try_login($requireSuperAccess = false) {
-		$account_url = (ACCOUNTS_HTTPS ? "https" : "http") . '://accounts.' . BASE_DOMAIN;
+		$account_url_server = 'http://accounts.' . BASE_DOMAIN;
 		
 		if (isset($_SESSION['continue'])) {
 			return false;
@@ -50,7 +50,7 @@ namespace JENV {
 			$token = $_GET['token'];
 			
 			try {
-				$curl = curl_init($account_url . '/api/get_current_user?' . http_build_query(['token' => $token]));
+				$curl = curl_init($account_url_server . '/api/get_current_user?' . http_build_query(['token' => $token]));
 				curl_setopt($curl, \CURLOPT_RETURNTRANSFER, 1);
 				$data = curl_exec($curl);
 				$obj  = json_decode($data, true);
