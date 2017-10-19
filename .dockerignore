@@ -28,3 +28,4 @@ document-root
 ### <<< END MICRO-BUILD SECTION
 
 php-config/
+extensions/
