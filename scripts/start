@@ -1,0 +1,4 @@
+#!/bin/sh
+
+echo "try start nginx server."
+exec nginx -g "daemon off;"

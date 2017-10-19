@@ -1,0 +1,3 @@
+#!/bin/sh
+
+nginx -c "${CONFIG_FILE}" -s stop
