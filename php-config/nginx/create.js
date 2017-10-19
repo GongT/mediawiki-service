@@ -9,13 +9,17 @@ server {
 	
 	index index.php;
 	autoindex on;
-	try_files $uri "$\{uri}index.php?$query_string";
+	try_files $uri "$\{uri}index.php?$query_string" $uri/;
 	
 	proxy_set_header X-Https "$https$http_x_https";
 	proxy_set_header X-Http2 "$http2$http_x_http2";
 	proxy_set_header Host $host;
 	
 	include allow_php.conf;
+	
+	location ^~ /resources {
+		break;
+	}
 }
 `.trim() + '\n';
 };
