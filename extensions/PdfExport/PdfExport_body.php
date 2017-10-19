@@ -190,7 +190,7 @@ $wgPdfExportHttpsImages = false; // set to true if page is on a HTTPS server and
                         }
  
 			$self = SpecialPage::getTitleFor( 'PdfPrint' );
-			$wgOut->addHtml( wfMsgExt( 'pdf_print_text', 'parse' ) );
+			$wgOut->addHtml( wfMessage( 'pdf_print_text' )->format() );
  
 			$form = Xml::openElement( 'form', array( 'method' => 'post',
 								 'action' => $self->getLocalUrl( 'action=submit' ) ) );
@@ -198,48 +198,48 @@ $wgPdfExportHttpsImages = false; // set to true if page is on a HTTPS server and
 			$form .= Xml::openElement( 'textarea', array( 'name' => 'pagel', 'cols' => 40, 'rows' => 10 ) );
 			$form .= Xml::closeElement( 'textarea' );
 			$form .= '<br />';
-                        $form .= '<br />' . wfMsg('pdf_size') .": ";
-	                $form .= Xml::listDropDown ('Size', wfMsg ('pdf_size_options'),'', wfMsg('pdf_size_default'));
-			$form .= Xml::radioLabel(wfMsg ('pdf_portrait'), 'orientation' , 'portrait' , 'portrait', true); 	
-			$form .= Xml::radioLabel(wfMsg ('pdf_landscape'), 'orientation' , 'landscape' , 'landscape', false);  
+                        $form .= '<br />' . wfMessage('pdf_size')->text() .": ";
+	                $form .= Xml::listDropDown ('Size', wfMessage ('pdf_size_options')->text(),'', wfMessage('pdf_size_default')->text());
+			$form .= Xml::radioLabel(wfMessage ('pdf_portrait')->text(), 'orientation' , 'portrait' , 'portrait', true);
+			$form .= Xml::radioLabel(wfMessage ('pdf_landscape')->text(), 'orientation' , 'landscape' , 'landscape', false);
 			$form .= '<br />';
-			$form .= wfMsg ('pdf_fontface_label').": ";
-			$form .= Xml::listDropDown ('fontface', wfMsg ('pdf_fontface_options'),'', wfMsg('pdf_fontface_default'));
-			$form .= " " .wfMsg ('pdf_fontsize_label').": ";
+			$form .= wfMessage ('pdf_fontface_label')->text().": ";
+			$form .= Xml::listDropDown ('fontface', wfMessage ('pdf_fontface_options')->text(),'', wfMessage('pdf_fontface_default')->text());
+			$form .= " " .wfMessage ('pdf_fontsize_label')->text().": ";
 			$form .= Xml::openElement( 'input', array( 'type'=>'text', 'name' => 'fontsize', 'value' => '11' ) );
 			$form .= Xml::closeElement( 'input' );
 			$form .= '<br />';
-			$form .= wfMsg ('pdf_permissions_label').":";
-			$form .= Xml::radioLabel(wfMsg ('pdf_permissions_all'), 'permissions' , 'all' , 'all', true);
+			$form .= wfMessage ('pdf_permissions_label')->text().":";
+			$form .= Xml::radioLabel(wfMessage ('pdf_permissions_all')->text(), 'permissions' , 'all' , 'all', true);
 			# "no-copy,print" results in a not-printable PDF (tested in KPDF & Acrobat Reader 9)
-			//$form .= Xml::radioLabel(wfMsg ('pdf_permissions_print'), 'permissions' , 'no-copy,print' , 'no-copy,print', false);
-			$form .= Xml::radioLabel(wfMsg ('pdf_permissions_none'), 'permissions' , 'none' , 'none', false);
+			//$form .= Xml::radioLabel(wfMessage ('pdf_permissions_print')->text(), 'permissions' , 'no-copy,print' , 'no-copy,print', false);
+			$form .= Xml::radioLabel(wfMessage ('pdf_permissions_none')->text(), 'permissions' , 'none' , 'none', false);
 			$form .= '<br />';
-			$form .= wfMsg ('pdf_margins_label').":";
+			$form .= wfMessage ('pdf_margins_label')->text().":";
 			$form .= '<ul>';
 			$form .= ' <li>';
 			$form .= Xml::openElement( 'input', array( 'type'=>'text', 'name' => 'margintop', 'value' => '20mm' ) );
 			$form .= Xml::closeElement( 'input' );
-			$form .= ' (' . wfMsg ('pdf_margins_label_top') . ')';
+			$form .= ' (' . wfMessage ('pdf_margins_label_top')->text() . ')';
 			$form .= ' </li>';
 			$form .= ' <li>';
 			$form .= Xml::openElement( 'input', array( 'type'=>'text', 'name' => 'marginsides', 'value' => '20mm' ) );
 			$form .= Xml::closeElement( 'input' );
-			$form .= ' (' . wfMsg ('pdf_margins_label_sides') . ')';
+			$form .= ' (' . wfMessage ('pdf_margins_label_sides')->text() . ')';
 			$form .= ' </li>';
 			$form .= ' <li>';
 			$form .= Xml::openElement( 'input', array( 'type'=>'text', 'name' => 'marginbottom', 'value' => '20mm' ) );
 			$form .= Xml::closeElement( 'input' );
-			$form .= ' (' . wfMsg ('pdf_margins_label_bottom') . ')';
+			$form .= ' (' . wfMessage ('pdf_margins_label_bottom')->text() . ')';
 			$form .= ' </li>';
 			$form .= '</ul>';
 			$form .= '<br />';
 			// input field for name of PDF
-			$form .= wfMsg ('pdf_filename').": ";
+			$form .= wfMessage ('pdf_filename')->text().": ";
 			$form .= Xml::openElement( 'input', array( 'type'=>'text', 'name' => 'filename', 'value' => 'print.pdf' ) );
 			$form .= Xml::closeElement( 'input' );
 			$form .= '<br /><br />';
-			$form .= Xml::submitButton( wfMsg( 'pdf_submit' ) );
+			$form .= Xml::submitButton( wfMessage( 'pdf_submit' )->text() );
 	                $form .= Xml::closeElement( 'form' );
 	                $wgOut->addHtml( $form );
  

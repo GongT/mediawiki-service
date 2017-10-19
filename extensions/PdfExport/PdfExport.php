@@ -29,7 +29,7 @@ $wgHooks['SkinTemplateToolboxEnd'][] = 'wfSpecialPdfToolbox';
 function wfSpecialPdfNav( &$skintemplate, &$nav_urls, &$oldid, &$revid ) {
 	wfLoadExtensionMessages( 'PdfPrint' );
 	$nav_urls['pdfprint'] = array(
-			'text' => wfMsg( 'pdf_print_link' ),
+			'text' => wfMessage( 'pdf_print_link' )->text(),
 			'href' => $skintemplate->makeSpecialUrl( 'PdfPrint', "page=" . wfUrlencode( "{$skintemplate->thispage}" )  )
 			);
 	return true;
