@@ -20,6 +20,9 @@ server {
 	location ^~ /resources {
 		break;
 	}
+	location ^~ /images {
+		break;
+	}
 }
 `.trim() + '\n';
 };
