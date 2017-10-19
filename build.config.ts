@@ -41,7 +41,7 @@ build.dependService('php-fpm', 'https://github.com/GongT/phpfpm-service.git');
 build.noDataCopy();
 build.disablePlugin(EPlugins.jenv);
 
-build.volume('document-root', '/data/document-root');
+build.volume('./document-root', '/data/document-root');
 build.environmentVariable('CONFIG_FILE', '/etc/nginx/nginx.conf', true);
 build.environmentVariable('CONFIG_FILE', __dirname + '/config/nginx.conf', false);
 
