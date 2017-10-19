@@ -16,7 +16,7 @@ if (process.env.IS_BUILD_MODE) {
 	$mediaRoot = '/data/contents/mediawiki-images'
 }
 Object.assign(envConfig, {
-	$wgLogo: "images/logo.png",
+	$wgLogo: "/images/logo.png",
 	$wgUploadPath: '/images',
 	$wgUploadDirectory: $mediaRoot,
 });
