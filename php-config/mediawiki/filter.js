@@ -10,6 +10,17 @@ const envConfig = {
 	$wgServer: https + '://wiki.' + JsonEnv.baseDomainName,
 	$wgSecretKey: createHash('sha256').update(__dirname).digest('hex'),
 };
+
+let $mediaRoot = '$wgResourceBasePath/images';
+if (process.env.IS_BUILD_MODE) {
+	$mediaRoot = '/data/contents/mediawiki-images'
+}
+Object.assign(envConfig, {
+	$wgLogo: $mediaRoot + "/logo.png",
+	$wgUploadPath: '/images',
+	$wgUploadDirectory: $mediaRoot,
+});
+
 for (const name in JsonEnv.php.mediawiki) {
 	if (!/^\$/.test(name)) {
 		continue;

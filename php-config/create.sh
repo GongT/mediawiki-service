@@ -33,8 +33,6 @@ node "${BUILD_ROOT}/jenv/create-login.js" | save-file "LocalSettings.jenv.php"
 	echo "require './LocalSettings.jenv.php';"
 	node "${BUILD_ROOT}/mediawiki/filter.js"
 	if is_build ; then
-		echo "\$wgUploadPath = '/images';"
-		echo "\$wgUploadDirectory = '/data/contents/mediawiki-images';"
 	fi
 	echo ""
 } | save-file "LocalSettings.php"
