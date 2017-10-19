@@ -18,6 +18,15 @@ source "functions/fetch-remote.sh"
 
 fetch-remote "${REMOTE_TYPE}" "${REMOTE_URL}"
 
+cd "${BUILD_ROOT}/../extensions"
+PLUGIN_DIR="${DOCUMENT_ROOT}/extensions"
+for i in *; do
+	if [ ! -e "${PLUGIN_DIR}/$i" ]; then
+		echo copy "$i" "${PLUGIN_DIR}/$i"
+		cp -r "$i" "${PLUGIN_DIR}/$i"
+	fi
+done
+
 node "${BUILD_ROOT}/jenv/create-login.js" | save-file "LocalSettings.jenv.php"
 {
 	echo "<?php"
