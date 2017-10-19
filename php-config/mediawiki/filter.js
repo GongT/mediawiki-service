@@ -52,9 +52,9 @@ function php_escape(value) {
 }
 
 function replaceOrAppend(text, regex, line) {
-	if (regex.test(settingText)) {
-		return settingText.replace(regex, line);
+	if (regex.test(text)) {
+		return text.replace(regex, line);
 	} else {
-		return settingText + '\n' + line;
+		return text + '\n' + line;
 	}
 }

@@ -35,7 +35,7 @@ namespace JENV {
 	}
 	
 	/* user login */
-	function try_login() {
+	function try_login($requireSuperAccess = false) {
 		$account_url = (ACCOUNTS_HTTPS ? "https" : "http") . '://accounts.' . BASE_DOMAIN;
 		
 		if (isset($_SESSION['continue'])) {
@@ -60,7 +60,7 @@ namespace JENV {
 			if (!isset($obj['status']) || $obj['status'] !== 0) {
 				die('failed: ' . $obj['message'] . '.<br/>' . linkTo('/login', 'retry') . '.<br/>' . continue_input());
 			}
-			if ($obj['user']['email'] !== 'admin@' . BASE_DOMAIN) {
+			if ($requireSuperAccess && ($obj['user']['email'] !== 'admin@' . BASE_DOMAIN)) {
 				die('no permission.<br/>' . linkTo('/login/logout', 'logout') . '.<br/>' . continue_input());
 			}
 			
@@ -75,11 +75,11 @@ namespace JENV {
 		return false;
 	}
 	
-	function session_try_login() {
+	function session_try_login($requireSuperAccess) {
 		if (session_status() !== PHP_SESSION_ACTIVE) {
 			session_start();
 		}
-		$ret = try_login();
+		$ret = try_login($requireSuperAccess);
 		session_write_close();
 		
 		return $ret;

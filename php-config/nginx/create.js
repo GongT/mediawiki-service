@@ -9,7 +9,7 @@ server {
 	
 	index index.php;
 	autoindex on;
-	try_files $uri "$\{uri}index.php?$query_string" $uri/;
+	try_files $uri "$\{uri}index.php?$query_string";
 	
 	proxy_set_header X-Https "$https$http_x_https";
 	proxy_set_header X-Http2 "$http2$http_x_http2";
