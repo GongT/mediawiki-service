@@ -7,6 +7,7 @@ let settingText = readFileSync(__dirname + '/LocalSettings.php', {encoding: 'utf
 settingText = settingText.replace(/\?>/, '');
 
 const envConfig = {
+	$wgServer: https + '://wiki.' + JsonEnv.baseDomainName,
 	$wgSecretKey: createHash('sha256').update(__dirname).digest('hex'),
 };
 for (const name in JsonEnv.php.mediawiki) {
