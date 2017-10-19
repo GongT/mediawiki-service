@@ -2,6 +2,7 @@
 import {JsonEnv} from "@gongt/jenv-data";
 import {EPlugins, MicroBuildConfig} from "./.micro-build/x/microbuild-config";
 import {MicroBuildHelper} from "./.micro-build/x/microbuild-helper";
+
 declare const build: MicroBuildConfig;
 declare const helper: MicroBuildHelper;
 /*
@@ -31,6 +32,7 @@ COPY config/ /etc/nginx/
 COPY scripts /data/scripts
 `);
 
+build.forceLocalDns(true);
 build.startupCommand('./scripts/start');
 build.shellCommand('/bin/sh');
 build.stopCommand('./scripts/stop');

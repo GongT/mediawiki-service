@@ -1,4 +1,5 @@
 #!/bin/sh
 
+update-resolve
 echo "try start nginx server."
 exec nginx -g "daemon off;"
