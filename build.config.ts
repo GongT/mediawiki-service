@@ -42,7 +42,7 @@ build.noDataCopy();
 build.disablePlugin(EPlugins.jenv);
 
 build.volume('./document-root', '/data/document-root');
-build.volume('/data/contents/mediawiki-images', '/data/document-root/images');
+build.volume('/data/contents', '/data/contents');
 build.environmentVariable('CONFIG_FILE', '/etc/nginx/nginx.conf', true);
 build.environmentVariable('CONFIG_FILE', __dirname + '/config/nginx.conf', false);
 

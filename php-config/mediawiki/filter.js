@@ -44,6 +44,7 @@ settingText = settingText
 	.replace(/\?>/g, '');
 
 console.log(settingText);
+console.log('$_debug = false;');
 
 function escapeRegExp(str) {
 	return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
