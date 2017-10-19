@@ -64,10 +64,8 @@ function php_escape(value) {
 
 function replaceOrAppend(text, regex, line) {
 	if (regex.test(text)) {
-		console.log('#    replaced: ' + line)
 		return text.replace(regex, line);
 	} else {
-		console.log('#    appended: ' + line)
 		return text + '\n' + line;
 	}
 }
