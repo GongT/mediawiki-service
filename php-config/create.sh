@@ -32,7 +32,5 @@ node "${BUILD_ROOT}/jenv/create-login.js" | save-file "LocalSettings.jenv.php"
 	echo "<?php"
 	echo "require './LocalSettings.jenv.php';"
 	node "${BUILD_ROOT}/mediawiki/filter.js"
-	if is_build ; then
-	fi
 	echo ""
 } | save-file "LocalSettings.php"
