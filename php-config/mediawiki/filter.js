@@ -1,6 +1,6 @@
 const JsonEnv = require(process.env.JENV_FILE_NAME);
 const {createHash} = require("crypto");
-const {readFileSync} = require("fs");
+const {readFileSync, existsSync} = require("fs");
 
 const https = JsonEnv.php.mediawiki.SSL? 'https' : 'http';
 let settingText = readFileSync(__dirname + '/LocalSettings.php', {encoding: 'utf8'}).trim();
@@ -28,10 +28,20 @@ for (const name of Object.keys(envConfig)) {
 const extensions = JsonEnv.php.mediawiki.enabledExtension || [];
 
 for (const name of extensions) {
-	const replace = new RegExp('^wfLoadExtension\\(\s*([\'"])\s*' + escapeRegExp(name) + '\s*\\1\s*\\);$', 'm');
-	const line = `wfLoadExtension(${JSON.stringify(name)});`;
+	const sig = name + '/extension.json';
+	const isNewType = existsSync(__dirname + '/../../extensions/' + sig) || existsSync(__dirname + '/../../document-root/extensions/' + sig);
+	const line = isNewType
+		? `wfLoadExtension(${JSON.stringify(name)});`
+		: `require_once "$IP/extensions/${name}/${name}.php";`;
+	const replace = isNewType
+		? new RegExp('^wfLoadExtension\\(\s*([\'"])\s*' + escapeRegExp(name) + '\s*\\1\s*\\);$', 'm')
+		: new RegExp(line);
 	settingText = replaceOrAppend(settingText, replace, line);
 }
+
+settingText = settingText
+	.replace(/<\?php/g, '')
+	.replace(/\?>/g, '');
 
 console.log(settingText);
 
@@ -53,8 +63,10 @@ function php_escape(value) {
 
 function replaceOrAppend(text, regex, line) {
 	if (regex.test(text)) {
+		console.log('#    replaced: ' + line)
 		return text.replace(regex, line);
 	} else {
+		console.log('#    appended: ' + line)
 		return text + '\n' + line;
 	}
 }

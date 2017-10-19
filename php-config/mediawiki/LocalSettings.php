@@ -196,3 +196,9 @@ $wgAutoConfirmAge = 86400 * 30;
 $wgFileExtensions = ['png', 'gif', 'jpg', 'jpeg', 'doc', 'zip', 'rar', 'pdf'];
 //Because we use email addresses as our wiki's username, we have to add this line
 $wgUserrightsInterwikiDelimiter = ' ';
+
+$_debug                 = false;
+$wgShowExceptionDetails = $_debug;
+$wgDebugToolbar         = $_debug;
+$wgShowDebug            = $_debug;
+$wgDevelopmentWarnings  = $_debug;
