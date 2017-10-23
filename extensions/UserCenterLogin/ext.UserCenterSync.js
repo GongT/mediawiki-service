@@ -33,7 +33,7 @@ $(function () {
 				top: 0,
 				// height: height,
 				zIndex: 10000,
-				background: 'rgb(200, 200, 255);',
+				background: 'rgb(200, 200, 255)',
 				padding: '5px 15px',
 				textAlign: 'center',
 				cursor: 'pointer'
