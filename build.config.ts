@@ -43,7 +43,7 @@ build.disablePlugin(EPlugins.jenv);
 
 build.volume('./document-root', '/data/document-root');
 if (!JsonEnv.isDebug) {
-	build.volume('/data/contents', '/data/contents');
+	build.volume('/data/contents/mediawiki-images', '/data/contents/mediawiki-images');
 }
 
 build.environmentVariable('CONFIG_FILE', '/etc/nginx/nginx.conf', true);
