@@ -1,0 +1,72 @@
+{
+	"name": "UserCenterLogin",
+	"version": "1.0",
+	"author": [
+		"[https://github.com/GongT GongT]"
+	],
+	"url": "https://github.com/GongT/user-center-mediawiki",
+	"descriptionmsg": "user-center-mediawiki",
+	"type": "other",
+	"MessagesDirs": {
+	},
+	"ExtensionMessagesFiles": {
+		"UserCenterLoginAlias": "UserCenterLogin.alias.php"
+	},
+	"ResourceModules": {
+		"ext.UserCenterLogin": {
+			"scripts": [
+				"ext.UserCenterLogin.js"
+			],
+			"position": "top",
+			"targets": [
+				"desktop",
+				"mobile"
+			]
+		},
+		"ext.UserCenterSync": {
+			"scripts": [
+				"ext.UserCenterSync.js"
+			],
+			"position": "top",
+			"targets": [
+				"desktop",
+				"mobile"
+			]
+		}
+	},
+	"ResourceFileModulePaths": {
+		"localBasePath": "",
+		"remoteExtPath": "UserCenterLogin"
+	},
+	"SessionProviders": {
+		"UserCenterSession": {
+			"class": "UserCenterSession",
+			"args": [
+				{
+					"priority": 10,
+					"callUserSetCookiesHook": true
+				}
+			]
+		}
+	},
+	"AutoloadClasses": {
+		"UserCenterLogin": "UserCenterLogin.class.php",
+		"UserCenterLoginInstall": "UserCenterLoginInstall.hook.php",
+		"UserCenterSession": "UserCenterSession.class.php"
+	},
+	"callback": "UserCenterLoginInstall::onRegistration",
+	"Hooks": {
+		"AuthChangeFormFields": "UserCenterLoginInstall::onAuthChangeFormFields",
+		"BeforePageDisplay": "UserCenterLoginInstall::autoLoginInit",
+		"PersonalUrls": "UserCenterLoginInstall::modifyLoginURLs"
+	},
+	"config": {
+		"UserCenterLogin_TokenCallback": "token",
+		"UserCenterLogin_TokenCookie": "user-login-token.plain",
+		"UserCenterLogin_RemoteUrl": null,
+		"PluggableAuth_Class": "token",
+		"PluggableAuth_EnableAutoLogin": true,
+		"PluggableAuth_EnableLocalLogin": true
+	},
+	"manifest_version": 1
+}

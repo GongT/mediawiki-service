@@ -21,7 +21,7 @@ server {
 		break;
 	}
 	location ^~ /images {
-		${process.env.IS_BUILD_MODE? 'alias /data/contents/mediawiki-images;' : ''}
+		${process.env.IS_DEBUG? 'alias /data/contents/mediawiki-images;' : ''}
 		break;
 	}
 }

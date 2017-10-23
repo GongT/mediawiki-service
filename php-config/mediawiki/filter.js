@@ -12,7 +12,7 @@ const envConfig = {
 };
 
 let $mediaRoot = '$wgResourceBasePath/images';
-if (process.env.IS_BUILD_MODE) {
+if (!JsonEnv.isDebug) {
 	$mediaRoot = '/data/contents/mediawiki-images'
 }
 Object.assign(envConfig, {
@@ -55,7 +55,9 @@ settingText = settingText
 	.replace(/\?>/g, '');
 
 console.log(settingText);
-console.log('$_debug = false;');
+if (!JsonEnv.isDebug) {
+	console.log('$_debug = false;');
+}
 
 function escapeRegExp(str) {
 	return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");

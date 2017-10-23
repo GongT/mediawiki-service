@@ -34,10 +34,36 @@ namespace JENV {
 		return '<a href="' . account_url($uri) . '">' . $title . '</a>';
 	}
 	
+	/**
+	 *
+	 * @param $token
+	 * @param $error
+	 *
+	 * @return bool|array
+	 */
+	function verifyToken($token, &$error) {
+		$account_url_server = 'http://accounts.' . BASE_DOMAIN;
+		try {
+			$curl = curl_init($account_url_server . '/api/get_current_user?' . http_build_query(['token' => $token]));
+			curl_setopt($curl, \CURLOPT_RETURNTRANSFER, 1);
+			$data = curl_exec($curl);
+			$obj  = json_decode($data, true);
+		} catch (\Exception $e) {
+			$error = 'failed: login server down now.';
+			
+			return false;
+		}
+		if (!isset($obj['status']) || $obj['status'] !== 0) {
+			$error = isset($obj['message']) ? $obj['message'] : 'unknown error';
+			
+			return false;
+		}
+		
+		return $obj['user'];
+	}
+	
 	/* user login */
 	function try_login($requireSuperAccess = false) {
-		$account_url_server = 'http://accounts.' . BASE_DOMAIN;
-		
 		if (isset($_SESSION['continue'])) {
 			return false;
 		}
@@ -49,17 +75,10 @@ namespace JENV {
 		if (isset($_GET['token'])) {
 			$token = $_GET['token'];
 			
-			try {
-				$curl = curl_init($account_url_server . '/api/get_current_user?' . http_build_query(['token' => $token]));
-				curl_setopt($curl, \CURLOPT_RETURNTRANSFER, 1);
-				$data = curl_exec($curl);
-				$obj  = json_decode($data, true);
-			} catch (\Exception $e) {
-				die('failed: login server down now.');
+			if (!verifyToken($token, $error)) {
+				die('failed: login service error: ' . $error . '.<br/>' . linkTo('/login', 'retry') . '.<br/>' . continue_input());
 			}
-			if (!isset($obj['status']) || $obj['status'] !== 0) {
-				die('failed: login service error.</br><pre>' . json_encode($obj, JSON_UNESCAPED_SLASHES + JSON_UNESCAPED_UNICODE) . '</pre>.<br/>' . linkTo('/login', 'retry') . '.<br/>' . continue_input());
-			}
+			
 			if ($requireSuperAccess && ($obj['user']['email'] !== 'admin@' . BASE_DOMAIN)) {
 				die('failed: no permission.<br/>' . linkTo('/login/logout', 'logout') . '.<br/>' . continue_input());
 			}

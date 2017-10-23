@@ -33,7 +33,7 @@ $wgStylePath  = "$wgScriptPath/skins";
 $wgServer = "http://127.0.0.1";
 
 ## The URL path to static resources (images, scripts, etc.)
-$wgResourceBasePath = $wgScriptPath;
+$wgResourceBasePath = '.';
 
 ## The URL path to the logo.  Make sure you change this from the default,
 ## or else you'll overwrite your logo when you upgrade!
