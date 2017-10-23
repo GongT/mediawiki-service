@@ -1,6 +1,6 @@
 $(function () {
 	if (!window.userCenter) {
-		mw.notify('服务器错误，目前无法登录账号，请联系我们。');
+		mw.notify(mw.message('login service has gone, please contact us.').text());
 	}
 	var currentToken = userCenter.getUserToken();
 	if (currentToken && mw.user.isAnon()) {
@@ -9,7 +9,7 @@ $(function () {
 			if (buttonHref) {
 				location.href = buttonHref;
 			} else {
-				mw.notify('糟糕！登录按钮没有了！');
+				mw.notify(mw.message('login button has gone').text());
 			}
 		}
 	}
@@ -18,7 +18,7 @@ $(function () {
 		if (buttonHref) {
 			location.href = buttonHref;
 		} else {
-			alert('糟糕！登出按钮没有了！');
+			alert(mw.message('logout button has gone').text());
 		}
 	}
 	
@@ -33,8 +33,11 @@ $(function () {
 				top: 0,
 				// height: height,
 				zIndex: 10000,
-				background: ''
-			}).text('login state changed, click here to reload.').appendTo('body').on('click', function () {
+				background: 'rgb(200, 200, 255);',
+				padding: '5px 15px',
+				textAlign: 'center',
+				cursor: 'pointer'
+			}).text(mw.message('login state changed, click here to reload page.').text()).appendTo('body').on('click', function () {
 				location.reload();
 			});
 		}

@@ -10,7 +10,7 @@ $(function () {
 			}
 		});
 	var orignalButton = $button.text();
-	var $form = $([$login[0], $password[0], $button[0]])
+	var $form = $([$login[0], $password[0], $button[0]]);
 	
 	$login.val('');
 	
@@ -27,7 +27,7 @@ $(function () {
 			location.reload(true);
 		}, function (e) {
 			finish();
-			mw.notify('登录失败：' + e.message);
+			mw.notify(mw.message('login failed').text() + e.message);
 		});
 	}
 });
