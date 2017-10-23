@@ -31,7 +31,7 @@ class UserCenterSession extends CookieSessionProvider {
 			return $ret;
 		} else {
 			MWDebug::log('login: new user create failed');
-			echo $status->getHTML();
+			echo $status->getHTML('new user create failed');
 			exit(500);
 		}
 	}
