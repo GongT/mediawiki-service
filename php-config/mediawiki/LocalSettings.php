@@ -199,6 +199,9 @@ $wgUserrightsInterwikiDelimiter = ' ';
 
 $_debug                 = true;
 $wgShowExceptionDetails = &$_debug;
+$wgShowDBErrorBacktrace = &$_debug;
 $wgDebugToolbar         = &$_debug;
 $wgShowDebug            = &$_debug;
-$wgDevelopmentWarnings  = &$_debug;
+$wgShowSQLErrors        = &$_debug;
+// $wgDebugDumpSql         = &$_debug;
+$wgDevelopmentWarnings = &$_debug;
